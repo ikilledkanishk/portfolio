@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REEL/DECK — Video, Design &amp; Audio Post-Production</title>
+<meta name="description" content="Freelance post-production: short & long form video editing, graphic design, and audio mixing/mastering.">
+
+<!--
+  ================================================================
+  CUSTOMIZE THESE — search for "EDIT:" comments throughout the file
+  1. Brand name "REEL/DECK" -> your name or studio name
+  2. Contact email / socials in the footer
+  3. Replace placeholder "clip" cards with your real project thumbnails
+  4. Swap the calendly/contact-form link placeholder for your real booking link
+  ================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0E1116;
+    --surface: #161B21;
+    --surface-2: #1C222A;
+    --line: #262E37;
+    --text: #ECE9E2;
+    --text-dim: #939AA4;
+    --text-faint: #5F6670;
+
+    --video: #E8A33D;
+    --video-dim: #4A3B22;
+    --design: #A78BFA;
+    --design-dim: #362F52;
+    --audio: #4FD1C5;
+    --audio-dim: #1E3B38;
+
+    --rec: #E8544D;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+
+  ::selection{ background: var(--video); color: #1a1000; }
+
+  :focus-visible{
+    outline: 2px solid var(--video);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(14,17,22,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height: 64px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family: var(--font-display);
+    font-weight:700;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    text-decoration:none;
+  }
+  .brand svg{ display:block; }
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap: 28px;
+    list-style:none;
+    margin:0; padding:0;
+  }
+  .nav-links a{
+    text-decoration:none;
+    color: var(--text-dim);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover{ color: var(--text); }
+  .timecode{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-faint);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    letter-spacing: 0.03em;
+  }
+  .rec-dot{
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--rec);
+    box-shadow: 0 0 0 0 rgba(232,84,77,0.5);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity:0.35; }
+  }
+  .nav-toggle{ display:none; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding: 96px 0 72px;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 0 0 20px;
+  }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(38px, 6vw, 68px);
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+    max-width: 780px;
+  }
+  .hero h1 em{
+    font-style: normal;
+    background: linear-gradient(90deg, var(--video), var(--design), var(--audio));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero p.lede{
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 560px;
+    margin: 0 0 36px;
+  }
+  .hero-cta{
+    display:flex;
+    align-items:center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 13px 22px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14.5px;
+    text-decoration:none;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary{
+    background: var(--text);
+    color: var(--bg);
+  }
+  .btn-primary:hover{ transform: translateY(-1px); }
+  .btn-ghost{
+    border-color: var(--line);
+    color: var(--text);
+  }
+  .btn-ghost:hover{ border-color: var(--text-faint); }
+
+  /* jump chips into tracks */
+  .track-chips{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding: 9px 14px 9px 10px;
+    border-radius: 5px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    text-decoration:none;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .chip:hover{ color: var(--text); }
+  .chip .swatch{
+    width: 8px; height: 8px;
+    border-radius: 2px;
+  }
+  .chip.video:hover{ border-color: var(--video); }
+  .chip.design:hover{ border-color: var(--design); }
+  .chip.audio:hover{ border-color: var(--audio); }
+  .chip.video .swatch{ background: var(--video); }
+  .chip.design .swatch{ background: var(--design); }
+  .chip.audio .swatch{ background: var(--audio); }
+
+  /* ---------- SECTION LABELS ---------- */
+  .section{
+    padding: 72px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .section-head p{
+    color: var(--text-dim);
+    font-size: 14.5px;
+    margin: 6px 0 0;
+    max-width: 480px;
+  }
+
+  /* ---------- TIMELINE TRACK ---------- */
+  .track{
+    display:flex;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .track-head{
+    width: 200px;
+    flex-shrink: 0;
+    padding: 22px 20px;
+    border-right: 1px solid var(--line);
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .track-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+  .track-tag .dot{ width:7px; height:7px; border-radius:2px; }
+  .track-video .track-tag .dot{ background: var(--video); }
+  .track-design .track-tag .dot{ background: var(--design); }
+  .track-audio .track-tag .dot{ background: var(--audio); }
+
+  .track-head h3{
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .track-head .services{
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .track-body{
+    flex: 1;
+    display:flex;
+    gap: 2px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    padding: 2px;
+  }
+  .track-body::-webkit-scrollbar{ height: 6px; }
+  .track-body::-webkit-scrollbar-track{ background: transparent; }
+  .track-body::-webkit-scrollbar-thumb{ background: var(--line); border-radius: 3px; }
+
+  .clip{
+    scroll-snap-align: start;
+    flex: 0 0 240px;
+    background: var(--surface-2);
+    border-radius: 4px;
+    padding: 16px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 168px;
+    position: relative;
+    transition: background 0.15s ease;
+  }
+  .clip:hover{ background: #222a33; }
+  .clip .slate{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+  }
+  .track-video .clip .slate{ color: var(--video); }
+  .track-design .clip .slate{ color: var(--design); }
+  .track-audio .clip .slate{ color: var(--audio); }
+
+  .clip .clip-title{
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--text);
+    margin: 14px 0 6px;
+  }
+  .clip .clip-desc{
+    font-size: 12.5px;
+    color: var(--text-dim);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .clip .clip-meta{
+    display:flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .tag{
+    font-size: 10.5px;
+    font-family: var(--font-mono);
+    color: var(--text-faint);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 3px 7px;
+  }
+
+  .clip.add-clip{
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    border: 1px dashed var(--line);
+    background: transparent;
+    color: var(--text-faint);
+    font-size: 12.5px;
+  }
+
+  /* ---------- PROCESS ---------- */
+  .process-list{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .process-step{
+    background: var(--surface);
+    padding: 26px 22px;
+  }
+  .process-step .num{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-bottom: 14px;
+  }
+  .process-step h4{
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin: 0 0 8px;
+  }
+  .process-step p{
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 0;
+    line-height: 1.55;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .about p{
+    color: var(--text-dim);
+    font-size: 15.5px;
+    line-height: 1.7;
+    margin: 0 0 16px;
+  }
+  .about-stats{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .stat{
+    background: var(--surface);
+    padding: 20px;
+  }
+  .stat .val{
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .stat .label{
+    font-size: 12px;
+    color: var(--text-faint);
+    margin-top: 4px;
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer{
+    padding: 80px 0 48px;
+  }
+  .contact-inner{
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+  }
+  footer h2{
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4.5vw, 46px);
+    font-weight: 700;
+    margin: 0;
+    max-width: 620px;
+    line-height: 1.12;
+  }
+  footer p.sub{
+    color: var(--text-dim);
+    font-size: 15.5px;
+    max-width: 480px;
+    margin: 0;
+  }
+  .footer-bottom{
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-faint);
+  }
+  .socials{
+    display:flex;
+    gap: 18px;
+  }
+  .socials a{
+    text-decoration:none;
+    color: var(--text-faint);
+    font-size: 13px;
+    transition: color 0.15s ease;
+  }
+  .socials a:hover{ color: var(--text); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px){
+    .about{ grid-template-columns: 1fr; }
+    .process-list{ grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 720px){
+    .wrap{ padding: 0 20px; }
+    .nav-links{ display:none; }
+    .hero{ padding: 64px 0 48px; }
+    .section{ padding: 52px 0; }
+    .track{ flex-direction: column; }
+    .track-head{ width: auto; border-right:none; border-bottom: 1px solid var(--line); flex-direction: row; align-items:center; justify-content:space-between; }
+    .track-head .services{ display:none; }
+    .process-list{ grid-template-columns: 1fr; }
+    .footer-bottom{ flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .rec-dot{ animation: none; }
+    .btn-primary:hover{ transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="1" y="1" width="20" height="20" rx="4" stroke="var(--text)" stroke-width="1.4"/>
+        <path d="M8.5 6.5V15.5L15 11L8.5 6.5Z" fill="var(--text)"/>
+      </svg>
+      <!-- EDIT: your studio / brand name -->
+      REEL/DECK
+    </a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="timecode">
+      <span class="rec-dot" aria-hidden="true"></span>
+      <span id="tc">00:00:00:00</span>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero wrap">
+    <p class="hero-eyebrow">Freelance post-production &mdash; open for projects</p>
+    <h1>Video, design, and sound&mdash;<em>cut, graded, and mixed</em> under one timeline.</h1>
+    <p class="lede">
+      I take raw footage, flat logos, and unmixed stems and turn them into things people
+      actually watch, remember, and listen to twice. Three crafts, one workflow, no handoffs lost in translation.
+    </p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary">Start a project</a>
+      <a href="#work" class="btn btn-ghost">See recent work</a>
+    </div>
+    <div class="track-chips">
+      <a href="#track-video" class="chip video"><span class="swatch"></span>Video editing</a>
+      <a href="#track-design" class="chip design"><span class="swatch"></span>Graphic design</a>
+      <a href="#track-audio" class="chip audio"><span class="swatch"></span>Sound engineering</a>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>Recent work</h2>
+          <p>A running timeline of what's shipped lately. Scroll each track sideways.</p>
+        </div>
+      </div>
+
+      <!-- VIDEO TRACK -->
+      <div style="margin-bottom:24px;">
+        <div class="track track-video" id="track-video">
+          <div class="track-head">
+            <span class="track-tag"><span class="dot"></span>Track 01</span>
+            <h3>Video editing</h3>
+            <p class="services">Short form &middot; long form &middot; sound design pass &middot; color</p>
+          </div>
+          <div class="track-body">
+            <!-- EDIT: replace these with real projects, thumbnails optional -->
+            <div class="clip">
+              <div class="slate"><span>CLIP_014</span><span>16:9</span></div>
+              <div class="clip-title">Podcast highlight cutdown</div>
+              <p class="clip-desc">45-min episode trimmed into 8 short-form clips for socials, captions burned in.</p>
+              <div class="clip-meta"><span class="tag">Short form</span><span class="tag">Captions</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>CLIP_027</span><span>9:16</span></div>
+              <div class="clip-title">Brand launch reel</div>
+              <p class="clip-desc">60-second vertical edit for a product drop, synced to a licensed track.</p>
+              <div class="clip-meta"><span class="tag">Vertical</span><span class="tag">Motion titles</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>CLIP_033</span><span>16:9</span></div>
+              <div class="clip-title">YouTube documentary segment</div>
+              <p class="clip-desc">14-minute long-form edit: pacing, b-roll layering, and a full color grade.</p>
+              <div class="clip-meta"><span class="tag">Long form</span><span class="tag">Color grade</span></div>
+            </div>
+            <div class="clip add-clip">Your project could sit here &rarr;</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESIGN TRACK -->
+      <div style="margin-bottom:24px;">
+        <div class="track track-design" id="track-design">
+          <div class="track-head">
+            <span class="track-tag"><span class="dot"></span>Track 02</span>
+            <h3>Graphic design</h3>
+            <p class="services">Logos &middot; cover art &middot; thumbnails &middot; brand kits &middot; apparel</p>
+          </div>
+          <div class="track-body">
+            <div class="clip">
+              <div class="slate"><span>DSN_008</span><span>LOGO</span></div>
+              <div class="clip-title">Coffee roastery logo mark</div>
+              <p class="clip-desc">Wordmark plus icon lockup with a small usage guide for packaging and signage.</p>
+              <div class="clip-meta"><span class="tag">Logo</span><span class="tag">Brand kit</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>DSN_015</span><span>ART</span></div>
+              <div class="clip-title">Single cover art</div>
+              <p class="clip-desc">3000x3000 cover art for a streaming release, matched to the track's mood.</p>
+              <div class="clip-meta"><span class="tag">Cover art</span><span class="tag">Streaming</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>DSN_021</span><span>THMB</span></div>
+              <div class="clip-title">Thumbnail set (x12)</div>
+              <p class="clip-desc">A month's worth of click-through-tested thumbnails for a gaming channel.</p>
+              <div class="clip-meta"><span class="tag">Thumbnails</span><span class="tag">A/B tested</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>DSN_029</span><span>APRL</span></div>
+              <div class="clip-title">Merch drop print design</div>
+              <p class="clip-desc">Front/back print-ready art for a streetwear capsule, delivered with mockups.</p>
+              <div class="clip-meta"><span class="tag">Clothing</span><span class="tag">Print-ready</span></div>
+            </div>
+            <div class="clip add-clip">Your project could sit here &rarr;</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIO TRACK -->
+      <div>
+        <div class="track track-audio" id="track-audio">
+          <div class="track-head">
+            <span class="track-tag"><span class="dot"></span>Track 03</span>
+            <h3>Sound engineering</h3>
+            <p class="services">Mixing &middot; mastering &middot; podcast cleanup &middot; loudness match</p>
+          </div>
+          <div class="track-body">
+            <div class="clip">
+              <div class="slate"><span>AUD_004</span><span>WAV</span></div>
+              <div class="clip-title">EP mix &amp; master</div>
+              <p class="clip-desc">5-track EP mixed from stems and mastered to streaming loudness standards.</p>
+              <div class="clip-meta"><span class="tag">Mix</span><span class="tag">Master</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>AUD_011</span><span>WAV</span></div>
+              <div class="clip-title">Podcast audio cleanup</div>
+              <p class="clip-desc">Noise reduction, leveling, and EQ across a 12-episode back catalog.</p>
+              <div class="clip-meta"><span class="tag">Podcast</span><span class="tag">De-noise</span></div>
+            </div>
+            <div class="clip">
+              <div class="slate"><span>AUD_019</span><span>WAV</span></div>
+              <div class="clip-title">Single master for distribution</div>
+              <p class="clip-desc">Final master delivered in platform-ready formats with reference notes.</p>
+              <div class="clip-meta"><span class="tag">Master</span><span class="tag">Delivery specs</span></div>
+            </div>
+            <div class="clip add-clip">Your project could sit here &rarr;</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>What's on offer</h2>
+          <p>Book one track or run all three on the same project.</p>
+        </div>
+      </div>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="num" style="color:var(--video)">01</div>
+          <h4>Short-form video</h4>
+          <p>Cutdowns, reels, and social edits built for retention in the first three seconds.</p>
+        </div>
+        <div class="process-step">
+          <div class="num" style="color:var(--video)">02</div>
+          <h4>Long-form video</h4>
+          <p>Full episodes and YouTube uploads: pacing, b-roll, and a clean color pass.</p>
+        </div>
+        <div class="process-step">
+          <div class="num" style="color:var(--design)">03</div>
+          <h4>Brand &amp; graphic design</h4>
+          <p>Logos, thumbnails, cover art, brand kits, and print-ready clothing design.</p>
+        </div>
+        <div class="process-step">
+          <div class="num" style="color:var(--audio)">04</div>
+          <h4>Mixing &amp; mastering</h4>
+          <p>Stems mixed and mastered to release-ready specs for streaming or broadcast.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2>How a project runs</h2>
+          <p>Same four beats whether it's a 30-second reel or a full EP master.</p>
+        </div>
+      </div>
+      <div class="process-list">
+        <div class="process-step">
+          <div class="num">STEP 01</div>
+          <h4>Intake</h4>
+          <p>You send the brief and raw files. I confirm scope, turnaround, and price before anything starts.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">STEP 02</div>
+          <h4>First pass</h4>
+          <p>A draft edit, layout, or rough mix comes back with notes on the choices I made.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">STEP 03</div>
+          <h4>Revisions</h4>
+          <p>You mark up what to change. Two rounds are included in every quote by default.</p>
+        </div>
+        <div class="process-step">
+          <div class="num">STEP 04</div>
+          <h4>Delivery</h4>
+          <p>Final files land in whatever format and spec your platform needs, plus source files on request.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap about">
+      <div>
+        <h2 style="font-family:var(--font-display); font-size:26px; margin:0 0 20px;">Why one person, three crafts</h2>
+        <p>Most projects touch more than one medium anyway&mdash;a video needs a thumbnail, a mix needs cover art, a brand needs its logo animated. Working across all three means nothing gets lost explaining context to a second or third freelancer.</p>
+        <p><!-- EDIT: swap in your real background/bio --> I've spent the last few years splitting time between an NLE, a design canvas, and a DAW, freelancing for creators, small labels, and independent brands who need one dependable hand across their whole output rather than three separate ones.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat"><div class="val">3</div><div class="label">Disciplines, one workflow</div></div>
+        <div class="stat"><div class="val">48h</div><div class="label">Typical first-pass turnaround</div></div>
+        <div class="stat"><div class="val">2</div><div class="label">Revision rounds included</div></div>
+        <div class="stat"><div class="val">100%</div><div class="label">Remote &amp; async friendly</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap contact-inner">
+    <h2>Got a video to cut, a brand to design, or a mix that needs finishing?</h2>
+    <p class="sub">Send over the brief and I'll get back to you with scope and a timeline&mdash;usually within a day.</p>
+    <div class="hero-cta">
+      <!-- EDIT: point this at your real email or booking link -->
+      <a href="mailto:youremail@example.com" class="btn btn-primary">youremail@example.com</a>
+      <a href="#top" class="btn btn-ghost">Back to top</a>
+    </div>
+
+    <div class="footer-bottom wrap" style="padding-left:0;padding-right:0;">
+      <span>&copy; <span id="year"></span> REEL/DECK. All work delivered under standard freelance license.</span>
+      <div class="socials">
+        <!-- EDIT: your real links -->
+        <a href="#">Instagram</a>
+        <a href="#">YouTube</a>
+        <a href="#">Twitter / X</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Running timecode — purely ambient/decorative, ties the multitrack metaphor together.
+  (function(){
+    var el = document.getElementById('tc');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!el) return;
+    if(reduce){ el.textContent = '00:12:04:08'; return; }
+
+    var start = Date.now();
+    function pad(n){ return String(n).padStart(2,'0'); }
+    function tick(){
+      var elapsed = Date.now() - start;
+      var totalFrames = Math.floor(elapsed / (1000/24));
+      var frames = totalFrames % 24;
+      var totalSeconds = Math.floor(totalFrames / 24);
+      var seconds = totalSeconds % 60;
+      var totalMinutes = Math.floor(totalSeconds / 60);
+      var minutes = totalMinutes % 60;
+      var hours = Math.floor(totalMinutes / 60);
+      el.textContent = pad(hours) + ':' + pad(minutes) + ':' + pad(seconds) + ':' + pad(frames);
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
