@@ -59,6 +59,43 @@
     background-size: 24px 24px;
   }
 
+  /* Custom Interactive Hardware Toggle Switches */
+.hardware-switch-input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 34px;
+  height: 18px;
+  background: #222834; /* default off color */
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+}
+
+/* The inner slider knob */
+.hardware-switch-input::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #4f5b70; /* knob off color */
+  top: 3px;
+  left: 3px;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease;
+}
+
+/* Visual state when toggled ON */
+.hardware-switch-input:checked {
+  background: var(--accent-video, #da912c); /* changes to your theme accent */
+}
+
+.hardware-switch-input:checked::before {
+  transform: translateX(16px); /* slides the knob right */
+  background: #f0f3f8; /* knob on color */
+}
+
   /* Custom Clean Scrollbars */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg-main); }
@@ -586,276 +623,320 @@
       </div>
     </section>
 
-    <!-- SECTION 03: EXPORT & RENDER CLIENT APPLICATION INTERFACE -->
-    <section class="export-section" id="export">
-      <div class="section-meta-hdr" style="text-align: center; margin: 0 auto 48px;">
-        <span style="color: var(--text-dark); font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em;">Final Delivery Node</span>
-        <h2 style="font-size: 36px; margin-top: 8px;">Initialize Export Sequence</h2>
-      </div>
+    <!-- RECONSTRUCTED CLIENT-FIRST EXPORT SECTION -->
+<section class="export-section" id="export" style="padding: 80px 48px; background: var(--bg-main); border-bottom: 1px solid var(--border-color);">
+  <div class="section-meta-hdr" style="text-align: center; margin: 0 auto 56px; max-width: 600px;">
+    <span style="color: var(--accent-video); font-size: 11px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.15em;">[ Node 03 // Production Intake ]</span>
+    <h2 style="font-family: var(--font-display); font-size: clamp(32px, 4vw, 48px); font-weight: 700; margin-top: 12px; color: var(--text-primary);">INITIALIZE PROJECT</h2>
+    <p style="color: var(--text-muted); font-family: var(--font-mono); font-size: 13px; margin-top: 12px; line-height: 1.5;">
+      Prepare your project brief. Select the services you need. Start a production session.
+    </p>
+  </div>
 
-      <div class="export-app-frame">
-        <!-- Configuration Area Left Side -->
-        <div class="export-settings-config">
-          <div class="pane-label" style="position: static; margin-bottom: 16px;">Render Settings presets</div>
-          
-          <div class="preset-selectors-grid" id="preset-grid">
-            <div class="preset-chip-btn selected" data-preset="Video Campaign">Social Campaign</div>
-            <div class="preset-chip-btn" data-preset="Brand Identity">Brand Identity</div>
-            <div class="preset-chip-btn" data-preset="Podcast Master">Podcast Audio</div>
-            <div class="preset-chip-btn" data-preset="Documentary Render">Documentary</div>
-            <div class="preset-chip-btn" data-preset="Motion Graphics Array">Motion Graphics</div>
+  <!-- Dual-Panel Simplified Operating System Layout -->
+  <div class="export-app-frame" style="width: 100%; max-width: 1200px; margin: 0 auto; background: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: grid; grid-template-columns: 1.2fr 0.8fr;">
+    
+    <!-- LEFT PANEL: Client Inputs -->
+    <div class="export-settings-config" style="padding: 40px; border-right: 1px solid var(--border-color);">
+      <form id="client-intake-form" onsubmit="triggerProjectSequence(event)">
+        
+        <!-- SECTION 1: SERVICE SELECTOR CARDS -->
+        <div class="pane-label" style="position: static; margin-bottom: 16px; color: var(--text-dark); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Section 01 // Select Services (Multiple Allowed)</div>
+        <div class="client-services-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; margin-bottom: 36px;">
+          <div class="service-selection-card" data-service="Short-form Video" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="toggleService(this)">
+            <div style="font-size: 10px; color: var(--text-dark); margin-bottom: 12px; font-family: var(--font-mono);">[ SF-01 ]</div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Short-form Video Editing</div>
           </div>
-
-          <form id="export-form" onsubmit="handleFormSubmit(event)">
-            <div class="pane-label" style="position: static; margin-bottom: 16px; margin-top: 32px;">Required Configuration Fields</div>
-            
-            <div class="config-fields-layout">
-              <div class="field-block">
-                <label>Client_Identity</label>
-                <input type="text" name="client_name" placeholder="e.g. OMEGA CORP" required>
-              </div>
-              <div class="field-block">
-                <label>Email_Endpoint</label>
-                <input type="email" name="client_email" placeholder="name@domain.com" required>
-              </div>
-            </div>
-
-            <div class="config-fields-layout">
-              <div class="field-block">
-                <label>Target Resolution</label>
-                <select name="resolution">
-                  <option>3840x2160 UHD (4K)</option>
-                  <option>1080x1920 Vertical (9:16)</option>
-                  <option>1920x1080 Letterbox (16:9)</option>
-                  <option>Source Native Vectors Only</option>
-                </select>
-              </div>
-              <div class="field-block">
-                <label>Target Deadline</label>
-                <input type="text" name="deadline" placeholder="e.g. Mid-September 2026" required>
-              </div>
-            </div>
-
-            <div class="field-block" style="margin-bottom: 24px;">
-              <label>Project_Brief_Notes (Asset Parameters)</label>
-              <textarea name="brief" rows="4" placeholder="Detail raw counts, length requirements, goals, and reference links..." required></textarea>
-            </div>
-
-            <div class="pane-label" style="position: static; margin-bottom: 16px;">Hardware Integration Flags</div>
-            <div class="matrix-toggle-list">
-              <div class="toggle-row-switch">
-                <span>Include RAW Project Assets</span>
-                <input type="checkbox" class="hardware-checkbox" name="raw_assets">
-              </div>
-              <div class="toggle-row-switch">
-                <span>Commercial Usage Rights</span>
-                <input type="checkbox" class="hardware-checkbox" name="commercial_rights" checked>
-              </div>
-              <div class="toggle-row-switch">
-                <span>Priority Render Queue Slot</span>
-                <input type="checkbox" class="hardware-checkbox" name="priority_queue">
-              </div>
-              <div class="toggle-row-switch">
-                <span>Cloud Archive Redundancy</span>
-                <input type="checkbox" class="hardware-checkbox" name="cloud_backup" checked>
-              </div>
-            </div>
-
-            <button type="submit" class="btn-action-trigger" id="export-submit-btn">EXPORT PROJECT SEQUENCE</button>
-          </form>
-        </div>
-
-        <!-- Render Feedback Terminal Right Side -->
-        <div class="export-preview-queue">
-          <div>
-            <div class="pane-label" style="position: static; margin-bottom: 16px;">Active Render Queue Terminal</div>
-            <div class="terminal-render-bezel">
-              <div class="terminal-headline">System Terminal Output Log Engine</div>
-              <div class="terminal-output-feed" id="terminal-feed">
-                <div class="terminal-log-row">[SYSTEM] Render Console initialized successfully.</div>
-                <div class="terminal-log-row">[SYSTEM] Waiting for client payload configurations...</div>
-                <div class="terminal-log-row">[SYSTEM] Queue Status: 1 active structural opening available.</div>
-              </div>
-            </div>
-
-            <div class="render-progress-container" id="progress-container">
-              <div class="action-info-lbl"><span id="render-status-lbl">Encoding Manifest Components...</span><span id="render-percentage-lbl">0%</span></div>
-              <div class="render-bar-track"><div class="render-bar-fill" id="render-bar-fill"></div></div>
-            </div>
+          <div class="service-selection-card" data-service="Long-form Video" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="toggleService(this)">
+            <div style="font-size: 10px; color: var(--text-dark); margin-bottom: 12px; font-family: var(--font-mono);">[ LF-02 ]</div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Long-form Video Editing</div>
           </div>
-
-          <!-- Queue Atmosphere Table Block -->
-          <div style="margin-top: 32px; border-top: 1px solid var(--border-color); padding-top: 20px;">
-            <div class="diag-title" style="margin-bottom: 10px;">Render Status Matrix</div>
-            <table class="matrix-table" style="margin-top: 0; font-size: 11px;">
-              <tr style="color: var(--text-dark);">
-                <td>JOB ID</td>
-                <td>PRESET</td>
-                <td>STATUS</td>
-              </tr>
-              <tr>
-                <td>PR_981</td>
-                <td>Documentary Array</td>
-                <td style="color: var(--accent-audio);">DELIVERED</td>
-              </tr>
-              <tr>
-                <td>PR_984</td>
-                <td>Social Campaign</td>
-                <td style="color: var(--accent-video);">RENDERING</td>
-              </tr>
-              <tr>
-                <td>PR_985</td>
-                <td id="live-queue-preset">Your Project</td>
-                <td style="color: var(--text-dark);" id="live-queue-status">IDLE IN ENGINES</td>
-              </tr>
-            </table>
+          <div class="service-selection-card" data-service="Motion Graphics" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="toggleService(this)">
+            <div style="font-size: 10px; color: var(--text-dark); margin-bottom: 12px; font-family: var(--font-mono);">[ MG-03 ]</div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Motion Graphics</div>
+          </div>
+          <div class="service-selection-card" data-service="Brand Identity" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="toggleService(this)">
+            <div style="font-size: 10px; color: var(--text-dark); margin-bottom: 12px; font-family: var(--font-mono);">[ ID-04 ]</div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Brand Identity &amp; Logos</div>
+          </div>
+          <div class="service-selection-card" data-service="Thumbnail Design" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="toggleService(this)">
+            <div style="font-size: 10px; color: var(--text-dark); margin-bottom: 12px; font-family: var(--font-mono);">[ TN-05 ]</div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Thumbnail Design</div>
+          </div>
+          <div class="service-selection-card" data-service="Audio Master" style="background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 6px; cursor: pointer; transition: all 0.2s;" onclick="toggleService(this)">
+            <div style="font-size: 10px; color: var(--text-dark); margin-bottom: 12px; font-family: var(--font-mono);">[ AU-06 ]</div>
+            <div style="font-weight: 700; font-size: 13px; color: var(--text-primary);">Audio Mixing &amp; Mastering</div>
           </div>
         </div>
-      </div>
-    </section>
 
-  </main>
+        <!-- SECTION 2: SIMPLIFIED PROJECT DETAILS -->
+        <div class="pane-label" style="position: static; margin-bottom: 16px; color: var(--text-dark); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Section 02 // Project Details</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="field-block" style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 10px; color: var(--text-dark); text-transform: uppercase;">Project Name</label>
+            <input type="text" id="inp-project-name" placeholder="e.g. Autumn Campaign" style="background: var(--bg-main); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-mono); padding: 12px; font-size: 12px; border-radius: 4px; outline: none;" required oninput="updateSummary()">
+          </div>
+          <div class="field-block" style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 10px; color: var(--text-dark); text-transform: uppercase;">Your Name / Company</label>
+            <input type="text" placeholder="e.g. Alex Studio" style="background: var(--bg-main); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-mono); padding: 12px; font-size: 12px; border-radius: 4px; outline: none;" required>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+          <div class="field-block" style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 10px; color: var(--text-dark); text-transform: uppercase;">Email Address</label>
+            <input type="email" placeholder="name@company.com" style="background: var(--bg-main); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-mono); padding: 12px; font-size: 12px; border-radius: 4px; outline: none;" required>
+          </div>
+          <div class="field-block" style="display: flex; flex-direction: column; gap: 6px;">
+            <label style="font-size: 10px; color: var(--text-dark); text-transform: uppercase;">Target Deadline</label>
+            <input type="text" id="inp-deadline" placeholder="e.g. October 1" style="background: var(--bg-main); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-mono); padding: 12px; font-size: 12px; border-radius: 4px; outline: none;" required oninput="updateSummary()">
+          </div>
+        </div>
+        <div class="field-block" style="display: flex; flex-direction: column; gap: 6px; margin-bottom: 36px;">
+          <label style="font-size: 10px; color: var(--text-dark); text-transform: uppercase;">Project Description &amp; Reference Assets</label>
+          <textarea rows="4" placeholder="Describe what you want to build. Feel free to drop links to YouTube videos, Google Drive folders, Pinterest boards, or files here..." style="background: var(--bg-main); border: 1px solid var(--border-color); color: var(--text-primary); font-family: var(--font-mono); padding: 12px; font-size: 12px; border-radius: 4px; outline: none; resize: none;" required></textarea>
+        </div>
 
-  <!-- Global Application Machine Console Operational Footer -->
-  <footer class="hardware-console-footer">
-    <div class="console-metric-unit">
-      <label>CPU Global Load</label>
-      <div>28.4%<span>8 Cores</span></div>
-    </div>
-    <div class="console-metric-unit">
-      <label>GPU Processing Matrix</label>
-      <div>54.1%<span>16GB VRAM</span></div>
-    </div>
-    <div class="console-metric-unit">
-      <label>Active Workflows</label>
-      <div>03 Sessions<span>Stable</span></div>
-    </div>
-    <div class="console-metric-unit">
-      <label>Network Node Link</label>
-      <div style="color: var(--accent-audio);">ONLINE<span>1 Gbps</span></div>
-    </div>
-    <div class="console-system-links">
-      <a href="mailto:contact@reeldeck.com">[Email Endpoint]</a>
-      <a href="#">[X / Twitter Link]</a>
-      <a href="#">[ReadMe.txt Metadata]</a>
-    </div>
-  </footer>
+        <!-- SECTION 3: REAL-WORLD PARAMETER OPTIONS -->
+        <div class="pane-label" style="position: static; margin-bottom: 16px; color: var(--text-dark); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Section 03 // Operational Options</div>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 40px;">
+  
+  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 12px; border-radius: 4px; border: 1px solid var(--border-color);">
+    <span style="font-size: 11px; color: var(--text-muted);">Priority Delivery Queue</span>
+    <input type="checkbox" id="opt-priority" class="hardware-switch-input" onchange="updateSummary()">
+  </div>
+  
+  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 12px; border-radius: 4px; border: 1px solid var(--border-color);">
+    <span style="font-size: 11px; color: var(--text-muted);">Request Master Source Files</span>
+    <input type="checkbox" class="hardware-switch-input">
+  </div>
+  
+  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 12px; border-radius: 4px; border: 1px solid var(--border-color);">
+    <span style="font-size: 11px; color: var(--text-muted);">Include Social Media Formats</span>
+    <input type="checkbox" class="hardware-switch-input">
+  </div>
+  
+  <div style="display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); padding: 12px; border-radius: 4px; border: 1px solid var(--border-color);">
+    <span style="font-size: 11px; color: var(--text-muted);">Include Core Brand Assets</span>
+    <input type="checkbox" class="hardware-switch-input">
+  </div>
 
 </div>
 
+        <!-- Master Submission Interaction Control Trigger -->
+        <button type="submit" id="btn-master-action" style="width: 100%; background: var(--accent-video); color: var(--text-primary); border: none; padding: 16px; font-family: var(--font-mono); font-size: 14px; font-weight: 700; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em; transition: opacity 0.2s;">
+          START PROJECT SEQUENCE
+        </button>
+      </form>
+
+      <!-- SUCCESS STAGE PANEL (Hidden on startup) -->
+      <div id="channel-router-panel" style="display: none; text-align: center; padding: 20px 0;">
+        <div style="color: var(--accent-audio); font-size: 14px; font-weight: 700; margin-bottom: 8px;">✓ PROJECT MANIFEST COMPILED SUCCESSFULLY</div>
+        <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 24px;">Select an entry endpoint channel below to establish your direct communication session.</p>
+        
+       <div style="display: flex; flex-direction: column; gap: 20px; max-width: 450px; margin: 0 auto;">
+  <a href="#" style="display: block; background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 4px; color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 12px; letter-spacing: 0.05em; transition: border-color 0.2s;">CONNECT VIA WHATSAPP</a>
+  <a href="#" style="display: block; background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 4px; color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 12px; letter-spacing: 0.05em; transition: border-color 0.2s;">OPEN EMAIL SESSION</a>
+  <a href="#" style="display: block; background: var(--bg-main); border: 1px solid var(--border-color); padding: 16px; border-radius: 4px; color: var(--text-primary); text-decoration: none; font-weight: 700; font-size: 12px; letter-spacing: 0.05em; transition: border-color 0.2s;">OPEN SOCIAL CHANNEL</a>
+</div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL: Live Summary & Studio Communications -->
+    <div class="export-preview-queue" style="padding: 40px; background: var(--bg-main); display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <div class="pane-label" style="position: static; margin-bottom: 20px; color: var(--text-dark); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em;">Live Project Matrix Summary</div>
+        
+        <div style="border: 1px solid var(--border-color); background: var(--bg-panel); border-radius: 6px; padding: 20px; margin-bottom: 24px;">
+          <table class="matrix-table" style="width: 100%; border-collapse: collapse; font-size: 12px;">
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px 0; color: var(--text-dark);">Identity</td>
+              <td style="padding: 10px 0; text-align: right; color: var(--text-primary);" id="sum-name">Untitled Session</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px 0; color: var(--text-dark); vertical-align: top;">Services</td>
+              <td style="padding: 10px 0; text-align: right; color: var(--text-primary);" id="sum-services">None Selected</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px 0; color: var(--text-dark);">Deadline</td>
+              <td style="padding: 10px 0; text-align: right; color: var(--text-primary);" id="sum-deadline">TBD</td>
+            </tr>
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.03);">
+              <td style="padding: 10px 0; color: var(--text-dark);">Priority</td>
+              <td style="padding: 10px 0; text-align: right; color: var(--text-primary);" id="sum-priority">Standard Speed</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 0; color: var(--text-dark);">Expected Reply</td>
+              <td style="padding: 10px 0; text-align: right; color: var(--accent-audio);">Within 24 Hours</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Terminal System Communication Output Stream -->
+        <div class="terminal-render-bezel" style="background: #05070a; border: 1px solid var(--border-color); border-radius: 6px; padding: 16px; min-height: 140px;">
+          <div style="color: var(--text-dark); font-size: 10px; text-transform: uppercase; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 6px;">[ Session Communication Log ]</div>
+          <div id="client-terminal-feed" style="font-size: 11px; color: var(--text-muted); line-height: 1.6;">
+            <div>&gt; Project initialized. Waiting for requirements loop...</div>
+          </div>
+        </div>
+
+        <!-- Progress Tracking Matrix Element -->
+        <div id="processing-matrix" style="margin-top: 20px; display: none;">
+          <div style="display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px;">
+            <span id="matrix-status-msg" style="color: var(--text-muted);">Packaging Manifest...</span>
+            <span id="matrix-status-pct" style="color: var(--accent-video);">0%</span>
+          </div>
+          <div style="height: 4px; background: var(--border-color); border-radius: 2px; overflow: hidden;">
+            <div id="matrix-bar-fill" style="height: 100%; width: 0%; background: var(--accent-video); transition: width 0.1s;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Environment System Metrics Block -->
+      <div style="border-top: 1px solid var(--border-color); padding-top: 16px; font-size: 11px; display: flex; justify-content: space-between; color: var(--text-dark);">
+        <div>STATUS: <span style="color: var(--accent-audio);">STUDIO_ONLINE</span></div>
+        <div>QUEUE: <span>2 ACTIVE CONTRACTS</span></div>
+        <div>AVAILABILITY: <span style="color: var(--text-primary);">OPEN SLOT Q3</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPACT WORKSPACE APP JAVASCRIPT ENGINE -->
 <script>
-  // 1. Dynamic Frame-Accurate Live Timecode Engine Ticker
-  const timecodeEl = document.getElementById('live-timecode');
-  let frameCount = 0;
+  let selectedServices = [];
 
-  function tickTimecode() {
-    frameCount++;
-    let totalSeconds = Math.floor(frameCount / 24);
-    let frames = frameCount % 24;
-    let totalMinutes = Math.floor(totalSeconds / 60);
-    let seconds = totalSeconds % 60;
-    let hours = Math.floor(totalMinutes / 60) % 24;
-    let minutes = totalMinutes % 60;
-
-    const pad = (num) => String(num).padStart(2, '0');
-    timecodeEl.textContent = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
-    requestAnimationFrame(tickTimecode);
+  function toggleService(card) {
+    const serviceName = card.getAttribute('data-service');
+    card.classList.toggle('selected');
+    
+    // Style switching matching application parameters
+    if(card.classList.contains('selected')) {
+      card.style.borderColor = 'var(--accent-video)';
+      card.style.background = 'var(--accent-video-bg)';
+      selectedServices.push(serviceName);
+      appendTerminalLog(`Selected service channel array: [ ${serviceName} ]`);
+    } else {
+      card.style.borderColor = 'var(--border-color)';
+      card.style.background = 'var(--bg-main)';
+      selectedServices = selectedServices.filter(s => s !== serviceName);
+      appendTerminalLog(`Removed service channel array: [ ${serviceName} ]`);
+    }
+    updateSummary();
   }
-  requestAnimationFrame(tickTimecode);
 
-  // 2. Navigation Tab Highlighter Engine tied to Scroll Monitoring
-  const sections = document.querySelectorAll('main > section, main > div, #top, #pipeline, #export');
-  const navTabs = document.querySelectorAll('#app-nav-tabs a');
+  function updateSummary() {
+    document.getElementById('sum-name').textContent = document.getElementById('inp-project-name').value || "Untitled Session";
+    document.getElementById('sum-deadline').textContent = document.getElementById('inp-deadline').value || "TBD";
+    document.getElementById('sum-services').innerHTML = selectedServices.length > 0 ? selectedServices.join('<br>') : "None Selected";
+    document.getElementById('sum-priority').textContent = document.getElementById('opt-priority').checked ? "PRIORITY TRACK" : "Standard Speed";
+    document.getElementById('sum-priority').style.color = document.getElementById('opt-priority').checked ? "var(--accent-video)" : "var(--text-primary)";
+  }
 
-  window.addEventListener('scroll', () => {
-    let currentSectionId = 'top';
-    sections.forEach(sec => {
-      const secTop = sec.offsetTop - 120;
-      if (window.scrollY >= secTop) {
-        currentSectionId = sec.getAttribute('id');
-      }
-    });
-
-    navTabs.forEach(tab => {
-      tab.classList.remove('active-tab');
-      let targetId = tab.getAttribute('href').substring(1);
-      if (targetId === currentSectionId || (currentSectionId === 'top' && targetId === 'top')) {
-        tab.classList.add('active-tab');
-      }
-    });
-  });
-
-  // 3. Export Preset Chip Selection Logic Control
-  const chips = document.querySelectorAll('.preset-chip-btn');
-  const queuePresetText = document.getElementById('live-queue-preset');
-  
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.classList.remove('selected'));
-      chip.classList.add('selected');
-      queuePresetText.textContent = chip.getAttribute('data-preset');
-    });
-  });
-
-  // 4. Interactive Simulation Log Render Process Form Execution
-  function appendLog(text, type = '') {
-    const feed = document.getElementById('terminal-feed');
-    const row = document.createElement('div');
-    row.className = `terminal-log-row ${type}`;
-    row.textContent = `[${new Date().toLocaleTimeString()}] ${text}`;
-    feed.appendChild(row);
+  function appendTerminalLog(msg) {
+    const feed = document.getElementById('client-terminal-feed');
+    const entry = document.createElement('div');
+    entry.textContent = `> ${msg}`;
+    feed.appendChild(entry);
     feed.scrollTop = feed.scrollHeight;
   }
 
-  function handleFormSubmit(e) {
+  function triggerProjectSequence(e) {
     e.preventDefault();
     
-    const submitBtn = document.getElementById('export-submit-btn');
-    const progContainer = document.getElementById('progress-container');
-    const barFill = document.getElementById('render-bar-fill');
-    const statusLbl = document.getElementById('render-status-lbl');
-    const percentLbl = document.getElementById('render-percentage-lbl');
-    const queueStatus = document.getElementById('live-queue-status');
+    const formElement = document.getElementById('client-intake-form');
+    const cPanel = document.getElementById('channel-router-panel');
+    const pMatrix = document.getElementById('processing-matrix');
+    const barFill = document.getElementById('matrix-bar-fill');
+    const statusMsg = document.getElementById('matrix-status-msg');
+    const statusPct = document.getElementById('matrix-status-pct');
 
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.4';
-    progContainer.style.display = 'block';
-    queueStatus.textContent = 'PACKAGING...';
-    queueStatus.style.color = 'var(--accent-video)';
-
-    const logStages = [
-      { pct: 15, msg: "Connecting to active pipeline structures...", log: "Establishing link encryption layers..." },
-      { pct: 35, msg: "Encoding structural file metadata profiles...", log: "Assets manifest verification processing..." },
-      { pct: 60, msg: "Rendering audio-to-video transient sequences...", log: "LUT color maps baked cleanly into sequence frames." },
-      { pct: 85, msg: "Compiling master delivery parameters...", log: "Normalizing audio stream arrays down to absolute target specs." },
-      { pct: 100, msg: "Delivery Package Dispatched Successfully.", log: "Payload deployed to delivery servers safely.", type: "success-log" }
+    formElement.style.display = 'none';
+    pMatrix.style.display = 'block';
+    
+    let progress = 0;
+    const stages = [
+      { p: 30, m: "Packaging Project Brief..." },
+      { p: 65, m: "Initializing Direct Communications..." },
+      { p: 90, m: "Selecting Delivery Endpoint Node..." },
+      { p: 100, m: "Sequence Verification Confirmed." }
     ];
 
-    let currentStageIndex = 0;
-    
-    function runSimulation() {
-      if (currentStageIndex < logStages.length) {
-        const stage = logStages[currentStageIndex];
-        
-        barFill.style.width = `${stage.pct}%`;
-        percentLbl.textContent = `${stage.pct}%`;
-        statusLbl.textContent = stage.msg;
-        appendLog(`[ENGINE] ${stage.log}`, stage.type || '');
-        
-        currentStageIndex++;
-        setTimeout(runSimulation, 1200);
-      } else {
-        queueStatus.textContent = "FINISHED";
-        queueStatus.style.color = "var(--accent-audio)";
-        appendLog("[SYSTEM] Render task finalized. Target sequence operational.", "success-log");
-        alert("Inquiry successfully packaged and submitted to the workspace pipeline engine.");
-      }
-    }
-    
-    appendLog("[INITIALIZE] Launching real-time production export script...");
-    setTimeout(runSimulation, 600);
-  }
-</script>
+    let currentStage = 0;
+    appendTerminalLog("Initializing Project Intake Transfer Pipeline Loop...");
 
-</body>
-</html>
+    const interval = setInterval(() => {
+      if(progress < 100) {
+        progress += 5;
+        barFill.style.width = `${progress}%`;
+        statusPct.textContent = `${progress}%`;
+        
+        if(currentStage < stages.length && progress >= stages[currentStage].p) {
+          statusMsg.textContent = stages[currentStage].m;
+          appendTerminalLog(stages[currentStage].m);
+          currentStage++;
+        }
+      } else {
+        clearInterval(interval);
+        pMatrix.style.display = 'none';
+        cPanel.style.display = 'block';
+        appendTerminalLog("Communication Router channels open.", "var(--accent-audio)");
+      }
+    }, 100);
+  }
+  // =======================================================
+  // REAL-TIME PLAYBACK TIMER & SCROLL NAVIGATION ENGINE
+  // =======================================================
+  
+  // 1. CONSTANTLY TICKING TIMECODE CLOCK (24 Frames Per Second)
+  let totalFrames = 0;
+
+  function runLiveTimecodeClock() {
+    totalFrames++;
+    
+    // Reset or loop the clock after 24 hours just in case
+    if (totalFrames >= 864000) totalFrames = 0; 
+
+    const hours = String(Math.floor(totalFrames / 86400)).padStart(2, '0');
+    const minutes = String(Math.floor((totalFrames % 86400) / 1440)).padStart(2, '0');
+    const seconds = String(Math.floor((totalFrames % 1440) / 24)).padStart(2, '0');
+    const frames = String(totalFrames % 24).padStart(2, '0');
+
+    const timecodeDisplay = document.getElementById('live-timecode');
+    if (timecodeDisplay) {
+      timecodeDisplay.textContent = `${hours}:${minutes}:${seconds}:${frames}`;
+    }
+  }
+
+  // Run the clock calculation loop every 41.67ms to perfectly match a 24fps frame render rate
+  setInterval(runLiveTimecodeClock, 1000 / 24);
+
+
+  // 2. SYNCHRONIZE AND HIGHLIGHT NAVIGATION TABS ON SCROLL
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+    const sections = ['top', 'pipeline', 'export'];
+    
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      
+      // Calculate active section threshold boundaries
+      const topBound = el.offsetTop - 120;
+      const bottomBound = topBound + el.offsetHeight;
+      
+      // Find and switch classes on the layout links
+      const tabLink = document.querySelector(`#app-nav-tabs a[href="#${id}"]`);
+      if (tabLink) {
+        if (scrollPos >= topBound && scrollPos < bottomBound) {
+          tabLink.classList.add('active-tab');
+        } else {
+          tabLink.classList.remove('active-tab');
+        }
+      }
+    });
+  });
+
+  // Force an initial update cycle on page load for the navbar highlights
+  window.dispatchEvent(new Event('scroll'));
+</script>
