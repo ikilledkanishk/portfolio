@@ -1,4 +1,4 @@
-# REEL/DECK
+# Portfolio
 
 A modern portfolio website concept built for creative freelancers.
 
