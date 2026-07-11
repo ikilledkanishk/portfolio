@@ -1,150 +1,39 @@
-# Portfolio
+# REEL/DECK — Creative Studio Portfolio Workspace
 
-A modern portfolio website concept built for creative freelancers.
+A highly interactive, single-page portfolio website designed specifically for creative post-production studios specializing in video editing, graphic design, and audio mixing/mastering. 
 
-REEL/DECK is designed for professionals working across **video editing**, **graphic design**, and **sound engineering**, using a visual language inspired by post-production workflows, timelines, and creative software.
-
-> Cut. Grade. Mix. One workflow.
+Built entirely using clean, high-performance vanilla HTML, CSS, and JavaScript, the interface breaks away from traditional static grids to emulate a professional, real-time creative operating desktop environment.
 
 ---
 
-## Preview
+## 🛠 Project Evolution & Versions
 
-![Preview](./assets/preview.png)
+This project document acts as a repository showcasing the evolutionary steps of refining a creative web application's user experience:
 
----
+1. **"Initial Draft" (First Draft)** The core baseline prototype focusing on mapping the essential interactive blocks, baseline grids, structural elements, and structural responsive constraints.
 
-## Features
+2. **"v2" (Designer-First Design)** A specialized conceptual layout built with an advanced, highly intricate post-production tool aesthetics inspired directly by complex applications like DaVinci Resolve and Adobe Premiere. While visually striking, this version placed technical parameters, rendering aesthetics, and designer-centric jargon at the forefront of the intake sequence.
 
-- Modern dark UI
-- Timeline-inspired layout
-- Responsive design
-- Sections for recent work, services, workflow, about, and contact
-- Clean typography
-- Smooth animations (where applicable)
-- Built with performance and simplicity in mind
+3. **"Final Version" (Client-First Concept)** The definitive, current production build. It keeps the distinct `REEL/DECK` technical operating system metaphor but completely overhauls the intake journey to be strictly client-first. Intimidating configurations are replaced with fluid, real-world options (e.g. multi-selection utility service cards, sliding hardware operational toggle switches) and a simplified live project summary matrix that makes project initialization effortless for incoming clients.
 
 ---
 
-## Built With
+## ✨ Core Interactive Engine Features
 
-- HTML5
-- CSS3
-- JavaScript
-
----
-
-## Sections
-
-- Hero
-- Recent Work
-- Services
-- Workflow
-- About
-- Contact
+* **Real-Time 24fps Playback Clock:** A custom, time-based looping SMPTE frame ticker running smoothly in the top corner completely independent of browser scroll locking.
+* **Synchronized Header Navigation Tracker:** Active navbar indicator nodes (`Timeline`, `Pipeline`, `Export`) that auto-calculate viewport thresholds and dynamically switch classes on window scroll.
+* **Client Intake & Communication Router Console:** A split-panel dashboard featuring a real-time terminal simulation log, progress matrix transfer animations, and an instant post-submission channel router to bridge communication directly with the studio.
+* **Play-on-Hover Media Integration:** Architecture optimized for zero-latency, public cloud-hosted video and audio files triggering playback dynamically upon cursor interaction.
 
 ---
 
-## Getting Started
+## 🎨 Open-Source Project Template
 
-Clone the repository:
+This workspace is entirely open-source and structured to be lightweight, self-contained (all core scripts and style configurations live in a single layout file), and easily modifiable. 
 
-```bash
-git clone https://github.com/yourusername/reel-deck.git
-```
+**Feel free to clone, branch, or download this project to use as an interactive template for your own personal portfolio projects!**
 
-Move into the project folder:
-
-```bash
-cd reel-deck
-```
-
-Open `index.html` in your browser or use Live Server.
-
----
-
-## Customization
-
-This project is intentionally kept easy to customize.
-
-You can change:
-
-- Brand name
-- Colors
-- Typography
-- Animations
-- Portfolio projects
-- Services
-- Contact information
-- Layout sections
-
-to make it your own.
-
-Whether you're a video editor, designer, developer, photographer, musician, or any other creative professional, you can adapt this template to fit your personal brand.
-
----
-
-## Use This As Your Own Portfolio
-
-You're welcome to use this repository as a starting point for your own portfolio.
-
-Feel free to:
-
-- Fork it
-- Modify it
-- Learn from it
-- Build upon it
-- Use it in your personal projects
-
-Attribution is appreciated but **not required**.
-
-If you create something cool with it, I'd love to see it.
-
----
-
-## Folder Structure
-
-```
-/
-├── assets/
-├── css/
-├── js/
-├── index.html
-└── README.md
-```
-
----
-
-## Future Improvements
-
-- Better micro-interactions
-- Additional page transitions
-- CMS integration
-- Blog support
-- Theme switcher
-- More portfolio layouts
-- Accessibility improvements
-
----
-
-## Contributing
-
-Contributions, ideas, bug reports, and feature suggestions are always welcome.
-
-If you'd like to improve the project, feel free to open an issue or submit a pull request.
-
----
-
-## License
-
-This project is released under the **MIT License**.
-
-You're free to use, modify, and distribute it, including for personal and commercial projects.
-
----
-
-## Support
-
-If you found this project useful, consider giving the repository a ⭐.
-
-It helps others discover the project and motivates future updates.
+### Quickstart Setup Guide:
+1. **Local Customization:** Clone this folder and adjust the raw copy text, titles, and item metadata within the sections.
+2. **Link Media Assets:** Drag your images, graphic components, or `.mp4` and `.mp3` files into your cloud dashboard (Vimeo, Backblaze B2, Cloudinary, etc.) and replace the source addresses (`src="..."`) with your live links.
+3. **Deploy Web App:** Simply drag and drop your root project directory containing your `index.html` file into free hosting frameworks like **Vercel**, **Netlify**, or configure it via **GitHub Pages** to launch your portal publicly to the world.
