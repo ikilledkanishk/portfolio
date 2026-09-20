@@ -1,4 +1,4 @@
-# REEL/DECK — Creative Studio Portfolio Workspace
+# Creative Studio Portfolio Workspace
 
 A highly interactive, single-page portfolio website designed specifically for creative post-production studios specializing in video editing, graphic design, and audio mixing/mastering. 
 
